@@ -52,7 +52,6 @@ predicted_df = pd.DataFrame(predicted_labels,
                             columns=["compensated"])
 predicted_df.to_csv("data/rf_prediction.csv", index_label="id")
 
-
 ## that's for me, you don't know the answers
 # expected_labels_df = pd.read_csv("data/car_insurance_test_labels.csv",
 #                                  header=0, index_col=0)
