@@ -47,20 +47,23 @@ class Interface:
             while True:
                 xrand = randint(0, self.width - 1)
                 yrand = randint(0, self.height - 1)
-                if field.objects[xrand][yrand] == '.':
+                if field.objects[yrand][xrand] == '.':
                     field.add_obstacle(xrand, yrand)
+                    break
         for i in range(self.predator_number):
             while True:
                 xrand = randint(0, self.width - 1)
                 yrand = randint(0, self.height - 1)
-                if field.objects[xrand][yrand] == '.':
+                if field.objects[yrand][xrand] == '.':
                     field.add_predator(xrand, yrand)
+                    break
         for i in range(self.prey_number):
             while True:
                 xrand = randint(0, self.width - 1)
                 yrand = randint(0, self.height - 1)
-                if field.objects[xrand][yrand] == '.':
+                if field.objects[yrand][xrand] == '.':
                     field.add_prey(xrand, yrand)
+                    break
         return field, iteration_number
 
     # asks for params
