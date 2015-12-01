@@ -43,21 +43,24 @@ class Interface:
         iteration_number = self.enter_params()
         field = Field.Field(self.width, self.height)
         obstacles = floor(self.width * self.height * self.obstacle_density / 100)
-        predators = self.predator_number
-        preys = self.prey_number
-        empty = self.width * self.height - obstacles - predators - preys
-        for i in range(self.height):
-            for j in range(self.height):
-                rand = randint(0, obstacles + predators + preys + empty - 1)
-                if rand < obstacles:
-                    obstacles -= 1
-                    field.add_obstacle(j, i)
-                elif rand < predators + obstacles:
-                    predators -= 1
-                    field.add_predator(j, i)
-                elif rand < preys + predators + obstacles:
-                    preys -= 1
-                    field.add_prey(j, i)
+        for i in range(obstacles):
+            while True:
+                xrand = randint(0, self.width - 1)
+                yrand = randint(0, self.height - 1)
+                if field.objects[xrand][yrand] == '.':
+                    field.add_obstacle(xrand, yrand)
+        for i in range(self.predator_number):
+            while True:
+                xrand = randint(0, self.width - 1)
+                yrand = randint(0, self.height - 1)
+                if field.objects[xrand][yrand] == '.':
+                    field.add_predator(xrand, yrand)
+        for i in range(self.prey_number):
+            while True:
+                xrand = randint(0, self.width - 1)
+                yrand = randint(0, self.height - 1)
+                if field.objects[xrand][yrand] == '.':
+                    field.add_prey(xrand, yrand)
         return field, iteration_number
 
     # asks for params
