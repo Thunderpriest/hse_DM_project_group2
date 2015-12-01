@@ -1,4 +1,5 @@
 class Creature:
+
     DEFAULT_HP = 100
     DEFAULT_LOSS_PER_TURN = 1
 
