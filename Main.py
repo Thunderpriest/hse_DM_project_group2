@@ -45,40 +45,58 @@ for t in range(0, iter_max):
 
                 # if hasn't eaten this turn, move
                 if not ate:
+                    dir = []
                     for a in range(-1, 2):
                         for b in range(-1, 2):
-                            if a == b == 0:
-                                continue
-                            try:
-                                temp = field.objects[x + a][y + b]
-                                if isinstance(temp, Obstacle.Obstacle):
-                                    continue
-                                elif isinstance(temp, str):
-                                    field.objects[x + a][y + b] = field.objects[x][y]
-                                    if t % birth_time != 0:
-                                        field.objects[x][y] = '.'
-                                    break
-                            except:
-                                continue
+                            if not a == b == 0:
+                                dir.append([a,b])
 
-
-            elif isinstance(obj, Prey.Prey):
-                # move
-                for a in range(-1, 2):
-                    for b in range(-1, 2):
-                        if a == b == 0:
-                            continue
+                    while len(dir) > 0:
+                        d = dir[random.randint(0, len(dir)-1)]
+                        a = d[0]
+                        b = d[1]
                         try:
                             temp = field.objects[x + a][y + b]
                             if isinstance(temp, Obstacle.Obstacle):
+                                dir.remove(d)
                                 continue
                             elif isinstance(temp, str):
                                 field.objects[x + a][y + b] = field.objects[x][y]
                                 if t % birth_time != 0:
                                     field.objects[x][y] = '.'
                                 break
+                            dir.remove(d)
                         except:
+                            dir.remove(d)
                             continue
+
+
+            elif isinstance(obj, Prey.Prey):
+                # move
+                dir = []
+                for a in range(-1, 2):
+                    for b in range(-1, 2):
+                        if not a == b == 0:
+                            dir.append([a,b])
+
+                while len(dir) > 0:
+                    d = dir[random.randint(0, len(dir)-1)]
+                    a = d[0]
+                    b = d[1]
+                    try:
+                        temp = field.objects[x + a][y + b]
+                        if isinstance(temp, Obstacle.Obstacle):
+                            dir.remove(d)
+                            continue
+                        elif isinstance(temp, str):
+                            field.objects[x + a][y + b] = field.objects[x][y]
+                            if t % birth_time != 0:
+                                field.objects[x][y] = '.'
+                            break
+                        dir.remove(d)
+                    except:
+                        dir.remove(d)
+                        continue
 
     interface.draw(field)
 
