@@ -8,7 +8,7 @@ class Field:
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.objects = [[None for x in range(width)] for x in range(height)]
+        self.objects = [['.' for x in range(width)] for x in range(height)]
 
     def add_obstacle(self, x_coord, y_coord):
         self.objects[x_coord][y_coord] = Obstacle.Obstacle()
