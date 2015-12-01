@@ -15,7 +15,7 @@ class Interface:
 
     # draws map in console
     def draw(self, field):
-        os.system('cls')
+        this.clear_console()
         self.draw_top_bar(field)
         for i in range(len(field.objects)):
             print(''.join([str(obj) for obj in field.objects[i]]))
@@ -32,9 +32,14 @@ class Interface:
         print("=" * ((field.width - len(subtitle)) // 2) + subtitle + "=" * (
             (field.width - len(subtitle)) // 2 + (field.width - len(subtitle)) % 2))
 
+    # clears console
+    def clear_console(self):
+        clear = lambda: os.system('cls')
+        clear()
+
     # generates new field
     def generate(self):
-        os.system('cls')
+        this.clear_console()
         print("GENERATING NEW MAP")
         iteration_number = self.enter_params()
         field = Field.Field(self.width, self.height)
