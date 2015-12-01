@@ -2,11 +2,15 @@ import Field
 import Predator
 import Prey
 import Obstacle
+import Interface
 import random
 
-field = #get field from generator
-iter_max = #get max iteration number from generator
+interface = Interface()
+
+field, iter_max = interface.generate()
 random.seed()
+
+interface.draw(field)
 
 #the main loop
 for t in range(0, iter_max):
@@ -26,7 +30,7 @@ for t in range(0, iter_max):
                 for i in range(-1, 2):
                     for j in range(-1, 2):
                         try:
-                            if field.objects[x + i][y + j] is Prey:
+                            if field.objects[x + i][y + j] is Prey and not ate:
                                 field.objects[x + i][y + j] = None
                                 field.objects[x + a][y + b].hitpoints = 20
                                 ate = True
@@ -71,7 +75,7 @@ for t in range(0, iter_max):
                     except:
                         continue
 
-    #draw
-    
+    interface.draw(field)
+
     if field.predators_count == 0 or field.preys_count == 0:
         break
