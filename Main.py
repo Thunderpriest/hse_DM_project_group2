@@ -5,7 +5,7 @@ import Obstacle
 import Interface
 import random
 
-interface = Interface()
+interface = Interface.Interface()
 
 field, iter_max = interface.generate()
 random.seed()

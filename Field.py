@@ -11,19 +11,19 @@ class Field:
         self.objects = [[None for x in range(width)] for x in range(height)]
 
     def add_obstacle(self, x_coord, y_coord):
-        self.__objects[x_coord][y_coord] = Obstacle()
+        self.objects[x_coord][y_coord] = Obstacle.Obstacle()
 
     def add_predator(self, x_coord, y_coord):
-        self.__objects[x_coord][y_coord] = Predator()
+        self.objects[x_coord][y_coord] = Predator.Predator()
 
     def add_prey(self, x_coord, y_coord):
-        self.__objects[x_coord][y_coord] = Prey()
+        self.objects[x_coord][y_coord] = Prey.Prey()
 
     def creatures_count(self):
         return self.predators_count() + self.preys_count()
 
     def predators_count(self):
-        self.objects.count(lambda x: x is Predator)
+        return self.objects.count(lambda x: x is Predator)
 
     def preys_count(self):
-        self.objects.count(lambda x: x is Prey)
+        return self.objects.count(lambda x: x is Prey)
