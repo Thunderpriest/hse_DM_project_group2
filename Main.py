@@ -1,4 +1,3 @@
-import Field
 import Predator
 import Prey
 import Obstacle
@@ -9,6 +8,7 @@ interface = Interface.Interface()
 
 field, iter_max = interface.generate()
 random.seed()
+birth_time = 40
 
 interface.draw(field)
 
@@ -16,22 +16,27 @@ interface.draw(field)
 for t in range(0, iter_max):
 
     #for each object
-    for x in range(0, field.width):
-        for y in range(0, field.height):
+    for x in range(0, field.height):
+        for y in range(0, field.width):
 
             obj = field.objects[x][y]
 
             if isinstance(obj, Predator.Predator):
+                if field.objects[x][y].hitpoints == 0:
+                    field.objects[x][y] = '.'
+                    continue
+
+                field.objects[x][y].hitpoints -= 1
 
                 #has it eaten?
                 ate = False
 
-                #eat everything within range
+                #eat within range
                 for i in range(-1, 2):
                     for j in range(-1, 2):
                         try:
                             if isinstance(field.objects[x + i][y + j], Prey.Prey) and not ate:
-                                field.objects[x + i][y + j] = None
+                                field.objects[x + i][y + j] = '.'
                                 field.objects[x + a][y + b].hitpoints = 20
                                 ate = True
                         except:
@@ -39,43 +44,42 @@ for t in range(0, iter_max):
 
                 #if hasn't eaten this turn, move
                 if not ate:
-                    while True:
-                        a = random.randint(-1, 1)
-                        b = random.randint(-1, 1)
+                    for a in range(-1, 2):
+                        for b in range(-1, 2):
+                            if a == b == 0:
+                                continue
+                            try:
+                                temp = field.objects[x + a][y + b]
+                                if isinstance(temp, Obstacle.Obstacle):
+                                    continue
+                                elif isinstance(temp, str):
+                                    field.objects[x + a][y + b] = field.objects[x][y]
+                                    if t % birth_time != 0:
+                                        field.objects[x][y] = '.'
+                                    break
+                            except:
+                                continue
+
+
+            elif isinstance(obj, Prey.Prey):
+                #move
+                for a in range(-1, 2):
+                    for b in range(-1, 2):
                         if a == b == 0:
                             continue
                         try:
                             temp = field.objects[x + a][y + b]
                             if isinstance(temp, Obstacle.Obstacle):
                                 continue
-                            elif isinstance(temp, None):
+                            elif isinstance(temp, str):
                                 field.objects[x + a][y + b] = field.objects[x][y]
-                                field.objects[x][y] = None
-                                field.objects[x + a][y + b].hitpoints -= 1
+                                if t % birth_time != 0:
+                                    field.objects[x][y] = '.'
                                 break
                         except:
                             continue
 
-
-            elif isinstance(obj, Prey.Prey):
-                #move
-                while True:
-                    a = random.randint(-1, 1)
-                    b = random.randint(-1, 1)
-                    if a == b == 0:
-                        continue
-                    try:
-                        temp = field.objects[x + a][y + b]
-                        if isinstance(temp, Obstacle.Obstacle):
-                            continue
-                        elif isinstance(temp, None):
-                            field.objects[x + a][y + b] = field.objects[x][y]
-                            field.objects[x][y] = None
-                            break
-                    except:
-                        continue
-
     interface.draw(field)
 
-    if field.predators_count == 0 or field.preys_count == 0:
+    if field.predators_count() == 0 or field.preys_count() == 0:
         break
