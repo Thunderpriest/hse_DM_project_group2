@@ -12,7 +12,6 @@ class Interface:
         self.obstacle_density = -1
         self.predator_number = 0
         self.prey_number = 0
-        self.generate()
 
     # draws map in console
     def draw(self, field):
