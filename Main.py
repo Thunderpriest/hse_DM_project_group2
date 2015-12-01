@@ -21,7 +21,7 @@ for t in range(0, iter_max):
 
             obj = field.objects[x][y]
 
-            if obj is Predator:
+            if isinstance(obj, Predator.Predator):
 
                 #has it eaten?
                 ate = False
@@ -30,7 +30,7 @@ for t in range(0, iter_max):
                 for i in range(-1, 2):
                     for j in range(-1, 2):
                         try:
-                            if field.objects[x + i][y + j] is Prey and not ate:
+                            if isinstance(field.objects[x + i][y + j], Prey.Prey) and not ate:
                                 field.objects[x + i][y + j] = None
                                 field.objects[x + a][y + b].hitpoints = 20
                                 ate = True
@@ -46,9 +46,9 @@ for t in range(0, iter_max):
                             continue
                         try:
                             temp = field.objects[x + a][y + b]
-                            if temp is Obstacle:
+                            if isinstance(temp, Obstacle.Obstacle):
                                 continue
-                            elif temp is None:
+                            elif isinstance(temp, None):
                                 field.objects[x + a][y + b] = field.objects[x][y]
                                 field.objects[x][y] = None
                                 field.objects[x + a][y + b].hitpoints -= 1
@@ -57,7 +57,7 @@ for t in range(0, iter_max):
                             continue
 
 
-            elif obj is Prey:
+            elif isinstance(obj, Prey.Prey):
                 #move
                 while True:
                     a = random.randint(-1, 1)
@@ -66,9 +66,9 @@ for t in range(0, iter_max):
                         continue
                     try:
                         temp = field.objects[x + a][y + b]
-                        if temp is Obstacle:
+                        if isinstance(temp, Obstacle.Obstacle):
                             continue
-                        elif temp is None:
+                        elif isinstance(temp, None):
                             field.objects[x + a][y + b] = field.objects[x][y]
                             field.objects[x][y] = None
                             break

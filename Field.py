@@ -23,7 +23,17 @@ class Field:
         return self.predators_count() + self.preys_count()
 
     def predators_count(self):
-        return self.objects.count(lambda x: x is Predator)
+        res = 0
+        for i in range(0, self.width):
+            for j in range(0, self.height):
+                if isinstance(self.objects[i][j], Predator.Predator):
+                    res += 1
+        return res
 
     def preys_count(self):
-        return self.objects.count(lambda x: x is Prey)
+        res = 0
+        for i in range(0, self.width):
+            for j in range(0, self.height):
+                if isinstance(self.objects[i][j], Prey.Prey):
+                    res += 1
+        return res
