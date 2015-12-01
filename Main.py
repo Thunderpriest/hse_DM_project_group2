@@ -8,13 +8,21 @@ field = #get field from generator
 iter_max = #get max iteration number from generator
 random.seed()
 
+#the main loop
 for t in range(0, iter_max):
+
+    #for each object
     for x in range(0, field.width):
         for y in range(0, field.height):
+
             obj = field.objects[x][y]
+
             if obj is Predator:
+
+                #has it eaten?
                 ate = False
 
+                #eat everything within range
                 for i in range(-1, 2):
                     for j in range(-1, 2):
                         try:
@@ -24,6 +32,8 @@ for t in range(0, iter_max):
                                 ate = True
                         except:
                             continue
+
+                #if hasn't eaten this turn, move
                 if not ate:
                     while true:
                         a = random.randint(-1, 1)
@@ -41,7 +51,10 @@ for t in range(0, iter_max):
                                 break
                         except:
                             continue
+
+
             elif obj is Prey:
+                #move
                 while true:
                     a = random.randint(-1, 1)
                     b = random.randint(-1, 1)
@@ -57,6 +70,8 @@ for t in range(0, iter_max):
                             break
                     except:
                         continue
+
     #draw
+    
     if field.predators_count == 0 or field.preys_count == 0:
         break
