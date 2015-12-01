@@ -28,7 +28,7 @@ class Interface:
         title = "The Fabulous Ocean Simulation Project"
         print("=" * ((field.width - len(title)) // 2) + title + "=" * (
             (field.width - len(title)) // 2 + (field.width - len(title)) % 2))
-        subtitle = "2015"
+        subtitle = "2015, HSE FCS SE, v." + randint(0, 22) + "." + randint(0, 57) + "." + randint(42, 666)
         print("=" * ((field.width - len(subtitle)) // 2) + subtitle + "=" * (
             (field.width - len(subtitle)) // 2 + (field.width - len(subtitle)) % 2))
 

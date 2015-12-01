@@ -3,6 +3,7 @@ import Prey
 import Obstacle
 import Interface
 import random
+import time
 
 interface = Interface.Interface()
 
@@ -12,10 +13,10 @@ birth_time = 40
 
 interface.draw(field)
 
-#the main loop
+# the main loop
 for t in range(0, iter_max):
 
-    #for each object
+    # for each object
     for x in range(0, field.height):
         for y in range(0, field.width):
 
@@ -28,10 +29,10 @@ for t in range(0, iter_max):
 
                 field.objects[x][y].hitpoints -= 1
 
-                #has it eaten?
+                # has it eaten?
                 ate = False
 
-                #eat within range
+                # eat within range
                 for i in range(-1, 2):
                     for j in range(-1, 2):
                         try:
@@ -42,7 +43,7 @@ for t in range(0, iter_max):
                         except:
                             continue
 
-                #if hasn't eaten this turn, move
+                # if hasn't eaten this turn, move
                 if not ate:
                     for a in range(-1, 2):
                         for b in range(-1, 2):
@@ -62,7 +63,7 @@ for t in range(0, iter_max):
 
 
             elif isinstance(obj, Prey.Prey):
-                #move
+                # move
                 for a in range(-1, 2):
                     for b in range(-1, 2):
                         if a == b == 0:
@@ -83,3 +84,5 @@ for t in range(0, iter_max):
 
     if field.predators_count() == 0 or field.preys_count() == 0:
         break
+
+    time.sleep(0.3)
