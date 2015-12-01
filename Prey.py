@@ -1,7 +1,4 @@
-import Creature
-
-
-class Prey(Creature):
+class Prey():
 
     def __str__(self):
         return "x"
