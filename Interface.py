@@ -38,7 +38,7 @@ class Interface:
         os.system('cls')
         print("GENERATING NEW MAP")
         iteration_number = self.enter_params()
-        field = Field(self.width, self.height)
+        field = Field.Field(self.width, self.height)
         obstacles = floor(self.width * self.height * self.obstacle_density / 100)
         predators = self.predator_number
         preys = self.prey_number

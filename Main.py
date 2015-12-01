@@ -39,7 +39,7 @@ for t in range(0, iter_max):
 
                 #if hasn't eaten this turn, move
                 if not ate:
-                    while true:
+                    while True:
                         a = random.randint(-1, 1)
                         b = random.randint(-1, 1)
                         if a == b == 0:
@@ -59,7 +59,7 @@ for t in range(0, iter_max):
 
             elif obj is Prey:
                 #move
-                while true:
+                while True:
                     a = random.randint(-1, 1)
                     b = random.randint(-1, 1)
                     if a == b == 0:
