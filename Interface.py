@@ -80,7 +80,7 @@ class Interface:
 
     # asks for width
     def enter_width(self):
-        print("   Enter width in pixels: ", end='')
+        print("   Enter width in symbols: ", end='')
         try:
             self.width = int(input())
         except:
@@ -92,7 +92,7 @@ class Interface:
 
     # asks for height
     def enter_height(self):
-        print("   Enter height in pixels: ", end='')
+        print("   Enter height in symbols: ", end='')
         try:
             self.height = int(input())
         except:
@@ -106,7 +106,7 @@ class Interface:
     def enter_obstacle_density(self):
         print("   Enter obstacle density in percentage: ", end='')
         try:
-            self.obstacle_density = int(input())
+            self.obstacle_density = float(input())
         except:
             print("   Your input is wrong!!")
             self.enter_obstacle_density()
